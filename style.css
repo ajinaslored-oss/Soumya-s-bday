@@ -1,0 +1,3371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+body {
+    font-family: "Fredoka", sans-serif;
+    background: #fff4f7;
+    color: #4a3038;
+}
+
+
+/* =========================================
+   WELCOME SCREEN
+========================================= */
+
+.welcome-screen {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(255,247,250,0.6) 45%, rgba(255,226,236,0) 80%),
+        radial-gradient(circle at 12% 18%, #ffe3ec 0, transparent 40%),
+        radial-gradient(circle at 88% 82%, #e9e0ff 0, transparent 42%),
+        radial-gradient(circle at 85% 12%, #fff1c9 0, transparent 35%),
+        #fff4f7;
+
+    z-index: 30;
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+
+.small-message,
+.welcome-screen h1,
+.gift-wrap,
+.intro,
+.click-button,
+.hint {
+    position: relative;
+    z-index: 2;
+}
+
+
+.small-message {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #b47c89;
+
+    margin-bottom: 12px;
+
+    animation: fadeUp 1s ease forwards;
+}
+
+
+.welcome-screen h1 {
+    font-family: "Fredoka", sans-serif;
+
+    font-size: clamp(48px, 9vw, 90px);
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    color: #4a3038;
+
+    margin-bottom: 0;
+
+    animation: fadeUp 1s ease 0.15s both;
+}
+
+
+.welcome-screen h1 span {
+    color: #e85d75;
+    font-style: italic;
+}
+
+
+.intro {
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    color: #7c5a63;
+
+    margin-bottom: 26px;
+
+    animation: fadeUp 1s ease 0.3s both;
+}
+
+
+/* =========================================
+   CLICK BUTTON
+========================================= */
+
+.click-button {
+    border: none;
+
+    background: #e85d75;
+
+    color: white;
+
+    padding: 17px 30px;
+
+    border-radius: 100px;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 12px 30px rgba(232, 93, 117, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation:
+        fadeUp 1s ease 0.45s both,
+        gentlePulse 2.5s ease-in-out 2s infinite;
+}
+
+
+.click-button:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 35px rgba(232, 93, 117, 0.35);
+}
+
+
+.click-button:active {
+    transform: scale(0.95);
+}
+
+
+.button-heart {
+    font-size: 20px;
+}
+
+
+.hint {
+    margin-top: 18px;
+
+    font-size: 12px;
+
+    color: #b18c95;
+
+    animation: fadeUp 1s ease 0.6s both;
+}
+
+
+/* =========================================
+   WELCOME — DECORATION LAYER
+========================================= */
+
+.welcome-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* dotted paper texture, fading out toward the center */
+.welcome-decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#f0a9bf 1.2px, transparent 1.5px);
+    background-size: 28px 28px;
+    opacity: 0.35;
+    -webkit-mask-image: radial-gradient(circle at center, transparent 22%, #000 80%);
+    mask-image: radial-gradient(circle at center, transparent 22%, #000 80%);
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.6;
+    animation: blobMove 16s ease-in-out infinite alternate;
+}
+.blob-1 { width: 38vw; height: 38vw; left: -8vw;  top: -10vw;    background: #ffd0e0; }
+.blob-2 { width: 34vw; height: 34vw; right: -8vw; bottom: -10vw; background: #dcd0ff; animation-delay: -5s; }
+.blob-3 { width: 26vw; height: 26vw; right: 8vw;  top: -8vw;     background: #fff0bf; animation-delay: -9s; }
+
+@keyframes blobMove {
+    to { transform: translate(4vw, 3vw) scale(1.15); }
+}
+
+/* washi tape in the corners */
+.tape {
+    position: absolute;
+    width: 130px;
+    height: 34px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255,170,195,0.8) 0 10px,
+        rgba(255,255,255,0.7) 10px 20px
+    );
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.tape-tl { left: -30px;  top: 26px;    transform: rotate(-38deg); }
+.tape-br { right: -30px; bottom: 26px; transform: rotate(-38deg); }
+
+.cursor-glow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,160,190,0.35), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    will-change: transform;
+}
+
+
+/* ---------- generated doodles / stickers ---------- */
+
+.decor {
+    position: absolute;
+    width: calc(var(--size) * var(--k, 1));
+    will-change: transform;
+}
+
+.decor.sticker { width: auto; }
+
+.decor-inner {
+    width: 100%;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.a-float   { animation-name: dFloat; }
+.a-spin    { animation-name: dSpin; animation-timing-function: linear; }
+.a-twinkle { animation-name: dTwinkle; }
+.a-sway    { animation-name: dSway; transform-origin: 50% 100%; }
+.a-drift   { animation-name: dDrift; }
+.a-flutter { animation-name: dFlutter; }
+.a-pulse   { animation-name: dPulse; }
+
+@keyframes dFloat {
+    0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+    50%      { transform: translateY(-14px) rotate(calc(var(--rot) + 6deg)); }
+}
+@keyframes dSpin {
+    from { transform: rotate(var(--rot)); }
+    to   { transform: rotate(calc(var(--rot) + 360deg)); }
+}
+@keyframes dTwinkle {
+    0%, 100% { transform: scale(0.65) rotate(var(--rot)); opacity: 0.55; }
+    50%      { transform: scale(1.15) rotate(calc(var(--rot) + 20deg)); opacity: 1; }
+}
+@keyframes dSway {
+    0%, 100% { transform: rotate(calc(var(--rot) - 8deg)); }
+    50%      { transform: rotate(calc(var(--rot) + 8deg)); }
+}
+@keyframes dDrift {
+    0%, 100% { transform: translateX(-14px); }
+    50%      { transform: translateX(14px); }
+}
+@keyframes dFlutter {
+    0%, 100% { transform: translate(0, 0) rotate(var(--rot)) scaleX(1); }
+    25%      { transform: translate(10px, -12px) rotate(var(--rot)) scaleX(0.55); }
+    50%      { transform: translate(20px, 0) rotate(var(--rot)) scaleX(1); }
+    75%      { transform: translate(10px, 12px) rotate(var(--rot)) scaleX(0.55); }
+}
+@keyframes dPulse {
+    0%, 100% { transform: scale(1) rotate(var(--rot)); }
+    15%      { transform: scale(1.18) rotate(var(--rot)); }
+    30%      { transform: scale(1) rotate(var(--rot)); }
+    45%      { transform: scale(1.12) rotate(var(--rot)); }
+}
+
+.doodle svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    filter: url(#rough-sm) drop-shadow(0 4px 4px rgba(120, 60, 80, 0.12));
+}
+.doodle svg * {
+    stroke: #4a3038;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* emoji "stickers" with a white cut-out border */
+.sticker .decor-inner {
+    width: auto;
+    font-size: calc(var(--size) * var(--k, 1));
+    line-height: 1;
+    filter:
+        drop-shadow(2px 0 0 #fff)
+        drop-shadow(-2px 0 0 #fff)
+        drop-shadow(0 2px 0 #fff)
+        drop-shadow(0 -2px 0 #fff)
+        drop-shadow(0 6px 8px rgba(120, 60, 80, 0.18));
+}
+
+/* polaroids */
+.polaroid {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    padding: 8% 8% 0;
+    border-radius: 4px;
+    box-shadow: 0 10px 24px rgba(150, 80, 100, 0.22);
+}
+.polaroid::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 44%;
+    height: 18px;
+    transform: translateX(-50%) rotate(-4deg);
+    background: rgba(255, 214, 120, 0.75);
+}
+.pol-pic {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #ffd6e3, #e5dcff);
+    font-size: calc(var(--size) * 0.45 * var(--k, 1));
+}
+.polaroid span {
+    display: block;
+    padding: 10% 0 12%;
+    text-align: center;
+    color: #b47c89;
+    font-size: calc(var(--size) * 0.13 * var(--k, 1));
+}
+
+/* tiny floating bubbles */
+.dot {
+    position: absolute;
+    border-radius: 50%;
+    animation: dotRise var(--dur) ease-in-out var(--delay) infinite;
+}
+@keyframes dotRise {
+    0%, 100% { transform: translateY(0) scale(1);       opacity: 0.3; }
+    50%      { transform: translateY(-24px) scale(1.3); opacity: 0.9; }
+}
+
+/* cursor trail + click burst */
+.trail {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    animation: trailFade 0.95s ease-out forwards;
+}
+@keyframes trailFade {
+    0%   { opacity: 0.95; transform: translate(-50%, -50%) scale(1); }
+    100% {
+        opacity: 0;
+        transform:
+            translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 30px)))
+            scale(0.3) rotate(90deg);
+    }
+}
+
+
+/* =========================================
+   WELCOME — THE GIFT BOX
+========================================= */
+
+.gift-wrap {
+    width: clamp(150px, 30vh, 300px);
+    aspect-ratio: 1;
+    margin: 0 auto 6px;
+    cursor: pointer;
+    perspective: 800px;
+    animation: giftPop 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both;
+}
+
+@keyframes giftPop {
+    from { opacity: 0; transform: scale(0.6) translateY(30px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.gift-tilt {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.gift-float {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: giftFloat 3.6s ease-in-out infinite;
+}
+
+@keyframes giftFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+.gift-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 12px 12px rgba(232, 93, 117, 0.22));
+}
+
+.gift-lid {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: giftLid 3.6s ease-in-out infinite;
+}
+
+@keyframes giftLid {
+    0%, 55%, 100% { transform: translateY(0) rotate(0); }
+    65% { transform: translateY(-16px) rotate(-3deg); }
+    75% { transform: translateY(0) rotate(1deg); }
+    82% { transform: translateY(-6px) rotate(-1deg); }
+    90% { transform: translateY(0) rotate(0); }
+}
+
+.gift-wrap:hover .gift-lid {
+    animation: giftLidHover 0.7s ease-in-out infinite;
+}
+
+@keyframes giftLidHover {
+    0%, 100% { transform: translateY(-18px) rotate(-5deg); }
+    50%      { transform: translateY(-28px) rotate(3deg); }
+}
+
+.gift-shadow {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    bottom: -2%;
+    height: 8%;
+    background: radial-gradient(ellipse, rgba(120, 60, 80, 0.25), transparent 70%);
+    animation: giftShadow 3.6s ease-in-out infinite;
+}
+
+@keyframes giftShadow {
+    0%, 100% { transform: scaleX(1);    opacity: 1; }
+    50%      { transform: scaleX(0.85); opacity: 0.7; }
+}
+
+.gift-rise {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 16%;
+    height: 0;
+    pointer-events: none;
+}
+
+.gift-rise span {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    font-size: 20px;
+    opacity: 0;
+    animation: giftRise 3.6s ease-out infinite;
+}
+
+@keyframes giftRise {
+    0%   { opacity: 0; transform: translate(-50%, 0) scale(0.4); }
+    15%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), -120px) scale(1.15) rotate(20deg); }
+}
+
+
+/* =========================================
+   ORIGINAL BUNNIES / UNICORN
+========================================= */
+
+.bunny,
+.unicorn {
+    position: fixed;
+
+    z-index: 8;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+.bunny {
+    font-size: 55px;
+}
+
+
+.bunny-one {
+    left: 7%;
+    bottom: 12%;
+
+    animation:
+        bunnyHop 5s ease-in-out infinite;
+}
+
+
+.bunny-two {
+    right: 8%;
+    top: 16%;
+
+    font-size: 42px;
+
+    animation:
+        bunnyFloat 4s ease-in-out infinite;
+}
+
+
+.unicorn {
+    right: 7%;
+    bottom: 10%;
+
+    font-size: 60px;
+
+    animation:
+        unicornFloat 4.5s ease-in-out infinite;
+}
+
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+.heart,
+.sparkle {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+.heart {
+    color: #ee8fa0;
+
+    opacity: 0.4;
+
+    font-size: 20px;
+}
+
+
+.h1 {
+    left: 20%;
+    bottom: -30px;
+
+    animation: floatHeart 7s linear infinite;
+}
+
+
+.h2 {
+    left: 72%;
+    bottom: -30px;
+
+    animation: floatHeart 9s linear 2s infinite;
+}
+
+
+.h3 {
+    left: 45%;
+    bottom: -30px;
+
+    animation: floatHeart 8s linear 4s infinite;
+}
+
+
+.sparkle {
+    color: #e6a7b3;
+
+    font-size: 22px;
+
+    opacity: 0.5;
+}
+
+
+.s1 {
+    left: 15%;
+    top: 20%;
+
+    animation: sparkleAnimation 2.5s ease-in-out infinite;
+}
+
+
+.s2 {
+    right: 20%;
+    top: 30%;
+
+    animation: sparkleAnimation 3s ease-in-out 1s infinite;
+}
+
+
+.s3 {
+    left: 80%;
+    bottom: 35%;
+
+    animation: sparkleAnimation 2.2s ease-in-out 0.5s infinite;
+}
+
+
+/* =========================================
+   SCREEN 2 — UNICORN SURPRISE
+========================================= */
+
+.unicorn-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 15;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #ffffff 0%,
+            #fff7fb 38%,
+            #ffe8f1 75%,
+            #ffdae7 100%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+
+.unicorn-screen.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================
+   MAGICAL BACKGROUND
+========================================= */
+
+.rainbow {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: clamp(220px, 42vw, 420px);
+    aspect-ratio: 2 / 1;
+
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+
+    background: conic-gradient(
+        from 180deg at 50% 100%,
+        #ff6b6b, #ffb26b, #ffe66d, #8ce99a, #66d9e8, #a78bfa, #ff6b6b
+    );
+
+    -webkit-mask: radial-gradient(
+        farthest-side at 50% 100%,
+        transparent calc(100% - 28px),
+        #000 calc(100% - 28px)
+    );
+    mask: radial-gradient(
+        farthest-side at 50% 100%,
+        transparent calc(100% - 28px),
+        #000 calc(100% - 28px)
+    );
+
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.magic-cloud {
+    position: absolute;
+    font-size: clamp(30px, 5vw, 54px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 2;
+    animation: cloudDrift 9s ease-in-out infinite;
+}
+
+.cloud-a { top: 10%; left: 8%; animation-duration: 10s; }
+.cloud-b { top: 16%; right: 10%; animation-duration: 8s; animation-delay: 1s; }
+.cloud-c { top: 6%; left: 42%; animation-duration: 11s; animation-delay: 2s; font-size: clamp(24px, 4vw, 40px); }
+
+@keyframes cloudDrift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(18px); }
+}
+
+.magic-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: clamp(90px, 18vh, 150px);
+
+    background: linear-gradient(180deg, #9ee88f 0%, #6fce6a 55%, #56b856 100%);
+
+    clip-path: polygon(
+        0% 22%, 8% 12%, 18% 20%, 30% 8%, 42% 18%,
+        55% 6%, 68% 16%, 80% 8%, 92% 18%, 100% 10%,
+        100% 100%, 0% 100%
+    );
+
+    z-index: 4;
+    pointer-events: none;
+}
+
+.pond {
+    position: absolute;
+    left: 12%;
+    bottom: 14%;
+
+    width: clamp(90px, 16vw, 150px);
+    height: clamp(38px, 6.5vw, 62px);
+
+    background: radial-gradient(ellipse at 35% 30%, #bdeeff 0%, #6fc9ea 55%, #3fa2d6 100%);
+    border-radius: 50%;
+
+    box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.pond-shine {
+    position: absolute;
+    top: 22%;
+    left: 18%;
+    width: 35%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+}
+
+.grass-flower {
+    position: absolute;
+    bottom: 6%;
+    font-size: clamp(16px, 2.2vw, 24px);
+    pointer-events: none;
+}
+
+.gf-1 { left: 30%; }
+.gf-2 { left: 45%; bottom: 10%; }
+.gf-3 { left: 62%; }
+.gf-4 { left: 74%; bottom: 12%; }
+.gf-5 { left: 88%; }
+
+.sparkle-e {
+    left: 60%;
+    top: 15%;
+    font-size: 18px;
+    animation-delay: 0.4s;
+}
+
+.sparkle-f {
+    left: 8%;
+    top: 45%;
+    font-size: 16px;
+    animation-delay: 1.2s;
+}
+
+
+/* =========================================
+   FULL-BODY SVG UNICORN
+========================================= */
+
+.unicorn-screen {
+    /* Used by both the width and the centering math below,
+       so the two always stay in sync. */
+    --unicorn-w: clamp(170px, 24vw, 260px);
+}
+
+.surprise-unicorn {
+    position: absolute;
+
+    bottom: clamp(70px, 15vh, 120px);
+
+    width: var(--unicorn-w);
+
+    z-index: 6;
+
+    transition:
+        left 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+        right 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.4s ease,
+        opacity 0.7s ease;
+}
+
+.unicorn-left {
+    left: -40%;
+}
+
+.unicorn-right {
+    right: -40%;
+}
+
+/* They walk all the way in and meet close to
+   the center, just a small gap apart. */
+.unicorn-screen.active .unicorn-left {
+    left: calc(50% - var(--unicorn-w) - 10px);
+}
+
+.unicorn-screen.active .unicorn-right {
+    right: calc(50% - var(--unicorn-w) - 10px);
+}
+
+.unicorn-right .unicorn-svg {
+    transform: scaleX(-1);
+}
+
+.unicorn-bob {
+    animation: unicornBob 0.6s ease-in-out infinite;
+}
+
+@keyframes unicornBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.unicorn-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 8px rgba(232, 93, 117, 0.18));
+}
+
+/* Trotting leg animation while the unicorns are on screen */
+.unicorn-screen.active .leg-unit.phase-a {
+    animation: legSwingA 0.6s ease-in-out infinite;
+}
+
+.unicorn-screen.active .leg-unit.phase-b {
+    animation: legSwingB 0.6s ease-in-out infinite;
+}
+
+/* Speed up to a gallop while running away */
+.unicorn-screen.running .leg-unit {
+    animation-duration: 0.32s !important;
+}
+
+@keyframes legSwingA {
+    0%, 100% { transform: rotate(-16deg); }
+    50% { transform: rotate(16deg); }
+}
+
+@keyframes legSwingB {
+    0%, 100% { transform: rotate(16deg); }
+    50% { transform: rotate(-16deg); }
+}
+
+.tail-strand {
+    transform-origin: 42px 100px;
+    animation: tailSway 1.2s ease-in-out infinite;
+}
+
+.mane {
+    transform-origin: 190px 40px;
+    animation: tailSway 1.4s ease-in-out infinite;
+}
+
+@keyframes tailSway {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+}
+
+/* Turn around, shrink, and rise toward the rainbow —
+   reads as running away into the distance rather than
+   exiting sideways off the screen. */
+.unicorn-screen.running .surprise-unicorn {
+    transition:
+        left 1.8s cubic-bezier(0.55, 0, 0.85, 0.35),
+        right 1.8s cubic-bezier(0.55, 0, 0.85, 0.35),
+        bottom 1.8s cubic-bezier(0.55, 0, 0.85, 0.35),
+        transform 1.8s cubic-bezier(0.55, 0, 0.85, 0.35),
+        opacity 1.8s ease 0.9s;
+}
+
+.unicorn-screen.running .unicorn-left,
+.unicorn-screen.running .unicorn-right {
+    bottom: 56%;
+    transform: scaleX(-1) scale(0.3);
+    opacity: 0;
+}
+
+.unicorn-screen.running .unicorn-left {
+    left: calc(50% - 20px);
+}
+
+.unicorn-screen.running .unicorn-right {
+    right: calc(50% - 20px);
+}
+
+
+/* =========================================
+   SPEECH BUBBLES
+========================================= */
+
+.speech-bubble {
+    position: absolute;
+
+    top: -68px;
+
+    background: #ffffff;
+
+    color: #e85d75;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    padding: 13px 22px;
+
+    border-radius: 30px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 10px 25px rgba(232, 93, 117, 0.18);
+
+    opacity: 0;
+
+    transform: scale(0.5);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    z-index: 10;
+}
+
+
+.speech-bubble::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -10px;
+
+    width: 20px;
+    height: 20px;
+
+    background: white;
+
+    transform: rotate(45deg);
+}
+
+
+.speech-left {
+    left: 10%;
+}
+
+
+.speech-left::after {
+    left: 30px;
+}
+
+
+.speech-right {
+    right: 10%;
+}
+
+
+.speech-right::after {
+    right: 30px;
+}
+
+
+/* Bubble appears after unicorns arrive */
+
+.unicorn-screen.active .speech-bubble {
+    opacity: 1;
+
+    transform: scale(1);
+
+    transition-delay: 0.75s;
+}
+
+
+/* Single shared bubble, centered above where the
+   two unicorns meet. */
+
+.unicorn-shared-bubble {
+    top: 30%;
+
+    left: 50%;
+
+    transform: translateX(-50%) scale(0.5);
+}
+
+
+.unicorn-shared-bubble::after {
+    left: 50%;
+
+    transform: translateX(-50%) rotate(45deg);
+}
+
+
+.unicorn-screen.active .unicorn-shared-bubble {
+    opacity: 1;
+
+    /* Wait for the walk-to-center transition (1.4s)
+       to finish before the bubble pops in. */
+    transition-delay: 1.5s;
+
+    transform: translateX(-50%) scale(1);
+}
+
+
+.unicorn-screen.running .unicorn-shared-bubble {
+    opacity: 0;
+
+    transform: translateX(-50%) scale(0);
+}
+
+
+/* =========================================
+   MESSAGE STACK (fixes overlap with a real gap)
+========================================= */
+
+.unicorn-message-stack {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+
+    width: 100%;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    z-index: 20;
+    text-align: center;
+}
+
+.unicorn-introduction {
+    color: #805c68;
+
+    font-size: 18px;
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+    white-space: nowrap;
+}
+
+
+.unicorn-screen.active .unicorn-introduction {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition-delay: 1.65s;
+}
+
+
+/* =========================================
+   SEE SURPRISE BUTTON
+========================================= */
+
+.surprise-action {
+    opacity: 0;
+    transform: translateY(20px);
+
+    text-align: center;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+.unicorn-screen.active .surprise-action {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition-delay: 2.1s;
+}
+
+
+.surprise-action p {
+    margin-bottom: 12px;
+
+    color: #a06f7d;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+
+.see-surprise-button {
+    border: none;
+
+    background: #e85d75;
+
+    color: white;
+
+    padding: 16px 27px;
+
+    border-radius: 100px;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 12px 30px rgba(232, 93, 117, 0.28);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.see-surprise-button:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 35px rgba(232, 93, 117, 0.38);
+}
+
+
+.see-surprise-button:active {
+    transform: scale(0.95);
+}
+
+
+.button-star {
+    font-size: 18px;
+}
+
+
+/* =========================================
+   UNICORN DECORATIVE SPARKLES
+========================================= */
+
+.unicorn-sparkle {
+    position: absolute;
+
+    color: #e7a4b5;
+
+    font-size: 28px;
+
+    opacity: 0.55;
+
+    animation:
+        unicornSparkle 2.5s ease-in-out infinite;
+
+    z-index: 2;
+}
+
+
+.sparkle-a {
+    left: 18%;
+    top: 25%;
+}
+
+
+.sparkle-b {
+    left: 30%;
+    bottom: 30%;
+
+    animation-delay: 0.7s;
+}
+
+
+.sparkle-c {
+    right: 18%;
+    top: 28%;
+
+    animation-delay: 1s;
+}
+
+
+.sparkle-d {
+    right: 30%;
+    bottom: 28%;
+
+    animation-delay: 1.5s;
+}
+
+
+/* Speech bubbles disappear while running */
+
+.unicorn-screen.running .speech-bubble {
+    opacity: 0;
+
+    transform: scale(0);
+}
+
+
+/* Hide button during run */
+
+.unicorn-screen.running .surprise-action,
+.unicorn-screen.running .unicorn-introduction {
+    opacity: 0;
+}
+
+
+/* =========================================
+   SCREEN 2.5 — FLOWER GARDEN
+========================================= */
+
+.flower-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 16;
+
+    overflow: hidden;
+
+    /* Dusky blue sky settling into warm cream,
+       like a watercolor sunrise. */
+    background:
+        linear-gradient(
+            180deg,
+            #3c5c78 0%,
+            #6f95b3 24%,
+            #a9c3d6 44%,
+            #e7dcbe 72%,
+            #f4ecd6 100%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+}
+
+
+.flower-screen.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+.flower-sky {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 22% 12%,
+            rgba(255, 244, 214, 0.35) 0%,
+            rgba(255, 244, 214, 0) 40%
+        ),
+        radial-gradient(
+            circle at 80% 8%,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0) 35%
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+.flower-haze {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 45%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(244, 236, 214, 0) 0%,
+            rgba(244, 236, 214, 0.55) 100%
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* Centered with full width + text-align (NOT a transform),
+   because the fadeUp animation overrides transform and used
+   to push this off-center. */
+.flower-garden-heading {
+    position: absolute;
+
+    top: 6%;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease 0.3s forwards;
+}
+
+
+.flower-garden-small {
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #4f3a2a;
+
+    margin-bottom: 8px;
+}
+
+
+.flower-garden-heading h2 {
+    font-family: "Fredoka", sans-serif;
+
+    font-size: clamp(28px, 5vw, 46px);
+
+    color: #3e2c1e;
+
+    text-shadow: 0 3px 0 rgba(255, 255, 255, 0.35);
+}
+
+
+/* Corner bubbles — pulled in closer to the
+   bouquet at the center of the screen. */
+
+.flower-bubble {
+    position: absolute;
+
+    max-width: 190px;
+
+    background: #ffffff;
+
+    color: #c23a72;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    padding: 13px 17px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 28px rgba(60, 40, 30, 0.22);
+
+    z-index: 22;
+
+    opacity: 0;
+
+    transform: translateY(14px) scale(0.7);
+}
+
+
+.flower-screen.active .flower-bubble {
+    animation:
+        bubblePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+        bubbleFloat 3.6s ease-in-out infinite;
+}
+
+
+@keyframes bubblePopIn {
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+@keyframes bubbleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1);
+    }
+
+}
+
+
+.bubble-tl {
+    top: 26%;
+    left: 27%;
+}
+
+.flower-screen.active .bubble-tl {
+    animation-delay: 0.5s, 1.2s;
+}
+
+
+.bubble-tr {
+    top: 26%;
+    right: 27%;
+}
+
+.flower-screen.active .bubble-tr {
+    animation-delay: 0.8s, 1.5s;
+}
+
+
+.bubble-bl {
+    bottom: 40%;
+    left: 24%;
+}
+
+.flower-screen.active .bubble-bl {
+    animation-delay: 1.1s, 1.8s;
+}
+
+
+.bubble-br {
+    bottom: 40%;
+    right: 24%;
+}
+
+.flower-screen.active .bubble-br {
+    animation-delay: 1.4s, 2.1s;
+}
+
+
+/* =========================================
+   THE BOUQUET
+========================================= */
+
+.flower-field {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 6;
+
+    pointer-events: none;
+}
+
+
+.flower-anchor {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 50%;
+
+    width: clamp(260px, 34vw, 430px);
+
+    height: clamp(320px, 62vh, 600px);
+}
+
+
+.flower-sway {
+    width: 100%;
+    height: 100%;
+
+    transform: translateX(-50%);
+
+    transform-origin: bottom center;
+
+    animation: flowerSway 4.5s ease-in-out infinite;
+    animation-delay: 2.6s;
+}
+
+
+@keyframes flowerSway {
+
+    0%,
+    100% {
+        transform: translateX(-50%) rotate(-3.5deg);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(3.5deg);
+    }
+
+}
+
+
+.flower-svg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    overflow: visible;
+
+    filter: drop-shadow(0 14px 16px rgba(40, 25, 15, 0.18));
+}
+
+
+/* Stems draw themselves in with a dash-offset reveal. */
+
+.stem-line {
+    fill: none;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+
+    animation-name: stemGrow;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes stemGrow {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+/* =========================================
+   CLOUD COVER TRANSITION
+   Rolls in to hide the unicorn screen, then
+   clears to reveal the flower garden underneath.
+========================================= */
+
+#cloud-transition {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 90;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+
+.cloud-piece {
+    position: absolute;
+
+    width: 42vw;
+    height: 42vw;
+
+    max-width: 520px;
+    max-height: 520px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #ffffff 0%,
+            #f3f7fb 55%,
+            rgba(243, 247, 251, 0) 78%
+        );
+
+    filter: blur(1px);
+
+    opacity: 0;
+
+    animation-name: cloudRoll;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes cloudRoll {
+
+    0% {
+        transform:
+            translate(var(--sx, 0), var(--sy, 0))
+            scale(0.55);
+
+        opacity: 0;
+    }
+
+    28% {
+        transform: translate(0, 0) scale(1.05);
+
+        opacity: 1;
+    }
+
+    58% {
+        transform: translate(0, 0) scale(1.18);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(var(--ex, 0), var(--ey, 0))
+            scale(1.5);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* Centered with full width + text-align (see heading note above). */
+.flower-continue {
+    position: absolute;
+
+    bottom: 5%;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 25;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease 2.7s forwards;
+}
+
+
+.flower-continue p {
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    color: #3e2c1e;
+
+    margin-bottom: 12px;
+
+    font-weight: 700;
+}
+
+
+.see-next-button {
+    border: none;
+
+    background: #d6336c;
+
+    color: white;
+
+    padding: 17px 30px;
+
+    border-radius: 100px;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 12px 30px rgba(150, 30, 80, 0.35);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: gentlePulse 2.5s ease-in-out 3.4s infinite;
+
+    pointer-events: auto;
+}
+
+
+.see-next-button:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 35px rgba(150, 30, 80, 0.45);
+}
+
+
+.see-next-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================
+   BATS
+========================================= */
+
+#bat-container {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    opacity: 0;
+}
+
+
+#bat-container.active {
+    opacity: 1;
+}
+
+
+.bat {
+    position: absolute;
+
+    left: -120px;
+
+    top: var(--top);
+
+    font-size: var(--size);
+
+    opacity: 0;
+
+    animation:
+        batFly var(--duration) linear var(--delay) forwards,
+        batFlap 0.4s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 4px 4px rgba(0, 0, 0, 0.12)
+        );
+}
+
+
+@keyframes batFly {
+
+    0% {
+        translate: -120px 20px;
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    35% {
+        translate: 35vw -35px;
+    }
+
+    65% {
+        translate: 70vw 35px;
+    }
+
+    100% {
+        translate: 118vw -20px;
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes batFlap {
+
+    0%, 100% {
+        rotate: -10deg;
+    }
+
+    50% {
+        rotate: 10deg;
+    }
+
+}
+
+
+/* One bat per swarm breaks off to look at the viewer,
+   then rejoins the group and flies away */
+.bat.bat-special {
+    animation:
+        batFlySpecial var(--duration) ease-in-out var(--delay) forwards,
+        batFlap 0.35s ease-in-out infinite;
+}
+
+@keyframes batFlySpecial {
+
+    0% {
+        translate: -120px 20px;
+        opacity: 0;
+        scale: 1;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    28% {
+        translate: 26vw -15px;
+        scale: 1;
+    }
+
+    42% {
+        translate: 44vw 8vh;
+        scale: 2.6;
+    }
+
+    56% {
+        translate: 44vw 8vh;
+        scale: 2.6;
+    }
+
+    70% {
+        translate: 62vw -18px;
+        scale: 1;
+    }
+
+    100% {
+        translate: 118vw -20px;
+        opacity: 0;
+        scale: 1;
+    }
+
+}
+
+
+/* =========================================
+   BIRTHDAY SCREEN
+========================================= */
+
+.birthday-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fffafa 0%,
+            #fff1f5 50%,
+            #ffe5ec 100%
+        );
+}
+
+
+.birthday-content {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 1.2s ease 1.1s,
+        transform 1.2s ease 1.1s;
+}
+
+
+.birthday-screen.revealed .birthday-content {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.birthday-decoration {
+    font-size: 25px;
+
+    margin-bottom: 20px;
+}
+
+
+.birthday-small {
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #b47c89;
+
+    margin-bottom: 15px;
+}
+
+
+.birthday-content h2 {
+    font-family: "Fredoka", sans-serif;
+
+    font-size: clamp(42px, 7vw, 75px);
+
+    color: #4a3038;
+
+    line-height: 1.05;
+}
+
+
+.birthday-content h3 {
+    font-family: "Fredoka", sans-serif;
+
+    font-size: clamp(32px, 5vw, 55px);
+
+    color: #e85d75;
+
+    font-style: italic;
+
+    margin-top: 5px;
+}
+
+
+.divider {
+    color: #e85d75;
+
+    margin: 25px 0;
+
+    font-size: 20px;
+}
+
+
+.love-message {
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #765761;
+
+    margin: 0 auto 18px;
+
+    max-width: 620px;
+}
+
+
+.final-love {
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 28px;
+
+    color: #e85d75;
+
+    margin-top: 25px;
+}
+
+
+.birthday-characters {
+    margin-top: 30px;
+
+    font-size: 32px;
+
+    letter-spacing: 10px;
+}
+
+
+/* =========================================
+   LIGHTS TOGGLE + NIGHT SCENE
+========================================= */
+
+.night-toggle {
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 6;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 100px;
+
+    padding: 10px 18px;
+
+    background: #ffffff;
+
+    color: #4a3038;
+
+    font-family: "Fredoka", sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 8px 20px rgba(232, 93, 117, 0.2);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.4s ease,
+        color 0.4s ease;
+}
+
+
+.night-toggle:hover {
+    transform: translateY(-2px);
+}
+
+
+.night-toggle:active {
+    transform: scale(0.95);
+}
+
+
+.night-toggle.night-active {
+    background: #2b2140;
+
+    color: #ffe9c7;
+}
+
+
+.night-toggle-icon {
+    font-size: 16px;
+}
+
+
+.night-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 4;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #251c3d 0%,
+            #140f24 60%,
+            #0b0817 100%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+
+.night-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.moon {
+    position: absolute;
+
+    top: 8%;
+    right: 12%;
+
+    font-size: clamp(46px, 8vw, 74px);
+
+    filter:
+        drop-shadow(0 0 25px rgba(255, 244, 200, 0.65));
+
+    opacity: 0;
+
+    transform: scale(0.6);
+
+    transition:
+        opacity 1s ease 0.3s,
+        transform 1s ease 0.3s;
+}
+
+
+.night-overlay.active .moon {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+.stars-layer {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+.star {
+    position: absolute;
+
+    color: #fff6da;
+
+    opacity: 0;
+
+    animation: starTwinkle 2.6s ease-in-out infinite;
+}
+
+
+.night-overlay.active .star {
+    opacity: var(--star-opacity, 0.8);
+}
+
+
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+}
+
+
+.fireflies-layer {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/* Outer element only ever handles position (via transform),
+   so it never fights with the flicker animation below. */
+.firefly {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 7px;
+    height: 7px;
+
+    opacity: 0;
+
+    will-change: transform;
+
+    transition:
+        transform 1.6s ease,
+        opacity 0.6s ease;
+}
+
+.firefly::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff6c8 0%,
+            #ffe27a 45%,
+            rgba(255, 226, 122, 0) 75%
+        );
+
+    box-shadow:
+        0 0 8px 2px rgba(255, 226, 122, 0.85);
+
+    animation: fireflyFlicker 1.8s ease-in-out infinite;
+}
+
+
+@keyframes fireflyFlicker {
+
+    0%,
+    100% {
+        transform: scale(0.85);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+}
+
+
+/* =========================================
+   CURTAINS
+========================================= */
+
+.curtain {
+    position: fixed;
+
+    top: 0;
+
+    width: 50%;
+
+    height: 100vh;
+
+    /* Sits BELOW the welcome screen (30) and unicorn
+       screen (15) so they hide the closed curtain, but
+       ABOVE the birthday screen (1) so it stays hidden
+       until curtains-open runs. */
+    z-index: 10;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a83252 0%,
+            #d64d6c 25%,
+            #b63a59 50%,
+            #d64d6c 75%,
+            #9e2d4b 100%
+        );
+
+    transition:
+        transform 1.8s cubic-bezier(0.77, 0, 0.18, 1);
+
+    box-shadow:
+        inset 0 0 70px rgba(0, 0, 0, 0.18);
+}
+
+
+.curtain-left {
+    left: 0;
+
+    transform-origin: left center;
+}
+
+
+.curtain-right {
+    right: 0;
+
+    transform-origin: right center;
+}
+
+
+.curtain-folds {
+    width: 100%;
+    height: 100%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.08) 0px,
+            rgba(255,255,255,0.08) 8px,
+            transparent 8px,
+            transparent 38px
+        );
+}
+
+
+.curtains-open .curtain-left {
+    transform: translateX(-100%);
+}
+
+
+.curtains-open .curtain-right {
+    transform: translateX(100%);
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+.confetti {
+    position: fixed;
+
+    width: 8px;
+    height: 14px;
+
+    top: -20px;
+
+    z-index: 130;
+
+    animation:
+        confettiFall 3s linear forwards;
+}
+
+
+/* =========================================
+   BALLOONS
+========================================= */
+
+#balloon-container {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 25;
+
+    overflow: hidden;
+}
+
+
+.balloon {
+    position: fixed;
+
+    bottom: -120px;
+
+    font-size: 55px;
+
+    opacity: 0;
+
+    animation:
+        balloonRise 9s ease-in-out forwards;
+}
+
+
+/* =========================================
+   PHOTO FRAME / CAROUSEL
+========================================= */
+
+.birthday-title-row {
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 50px;
+
+    flex-wrap: nowrap;
+}
+
+
+.birthday-title-text {
+    text-align: left;
+
+    min-width: 0;
+
+    flex: 1 1 380px;
+}
+
+
+.photo-frame {
+    position: relative;
+
+    width: 400px;
+
+    height: 400px;
+
+    flex-shrink: 0;
+}
+
+
+.photo-carousel-window {
+    width: 400px;
+
+    height: 400px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    z-index: 2;
+
+    border: 6px solid #ffffff;
+
+    box-shadow:
+        0 12px 30px rgba(232, 93, 117, 0.3);
+}
+
+
+.her-photo {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.photo-frame:hover .her-photo {
+    transform: scale(1.05);
+}
+
+
+/* Swipe animations */
+
+.her-photo.swipe-out-left {
+    animation:
+        swipeOutLeft 0.5s ease forwards;
+}
+
+
+.her-photo.swipe-out-right {
+    animation:
+        swipeOutRight 0.5s ease forwards;
+}
+
+
+.her-photo.swipe-in-left {
+    animation:
+        swipeInLeft 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+
+.her-photo.swipe-in-right {
+    animation:
+        swipeInRight 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+
+@keyframes swipeOutLeft {
+
+    to {
+        transform:
+            translateX(-320px)
+            rotate(-25deg)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes swipeOutRight {
+
+    to {
+        transform:
+            translateX(320px)
+            rotate(25deg)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes swipeInLeft {
+
+    from {
+        transform:
+            translateX(320px)
+            rotate(25deg)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+    to {
+        transform:
+            translateX(0)
+            rotate(0deg)
+            scale(1);
+
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes swipeInRight {
+
+    from {
+        transform:
+            translateX(-320px)
+            rotate(-25deg)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+    to {
+        transform:
+            translateX(0)
+            rotate(0deg)
+            scale(1);
+
+        opacity: 1;
+    }
+
+}
+
+
+/* Cartoon arrows */
+
+.arrow {
+    position: absolute;
+
+    top: 50%;
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 50%;
+
+    border: 3px solid #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff8fa3,
+            #e85d75
+        );
+
+    color: #fff;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 4;
+
+    box-shadow:
+        0 4px 10px rgba(232, 93, 117, 0.4);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.arrow-left {
+    left: -65px;
+
+    transform:
+        translateY(-50%);
+
+    animation:
+        arrowWiggleLeft 2s ease-in-out infinite;
+}
+
+
+.arrow-right {
+    right: -65px;
+
+    transform:
+        translateY(-50%);
+
+    animation:
+        arrowWiggleRight 2s ease-in-out infinite;
+}
+
+
+.arrow:hover {
+    transform:
+        translateY(-50%)
+        scale(1.25);
+
+    box-shadow:
+        0 6px 14px rgba(232, 93, 117, 0.55);
+}
+
+
+.arrow:active {
+    transform:
+        translateY(-50%)
+        scale(0.9);
+}
+
+
+@keyframes arrowWiggleLeft {
+
+    0%, 100% {
+        transform:
+            translateY(-50%)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-50%)
+            rotate(-10deg);
+    }
+
+}
+
+
+@keyframes arrowWiggleRight {
+
+    0%, 100% {
+        transform:
+            translateY(-50%)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-50%)
+            rotate(10deg);
+    }
+
+}
+
+
+.cloud {
+    position: absolute;
+
+    font-size: 50px;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 2px 3px rgba(0, 0, 0, 0.08)
+        );
+}
+
+
+.cloud-tl {
+    top: -22px;
+    left: -20px;
+}
+
+
+.cloud-tr {
+    top: -26px;
+    right: -24px;
+
+    transform:
+        scaleX(-1);
+}
+
+
+.cloud-bl {
+    bottom: -18px;
+    left: -24px;
+}
+
+
+.cloud-br {
+    bottom: -22px;
+    right: -18px;
+
+    transform:
+        scaleX(-1);
+}
+
+
+.love-burst {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    font-size: 18px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    animation:
+        loveBurst 1s ease-out forwards;
+}
+
+
+@keyframes loveBurst {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.5);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--tx)),
+                calc(-50% + var(--ty))
+            )
+            scale(1.2);
+    }
+
+}
+
+
+/* =========================================
+   GENERAL ANIMATIONS
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes gentlePulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 12px 30px rgba(232, 93, 117, 0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 12px 38px rgba(232, 93, 117, 0.45);
+    }
+
+}
+
+
+@keyframes bunnyHop {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translateY(-18px)
+            rotate(-4deg);
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            rotate(3deg);
+    }
+
+    75% {
+        transform:
+            translateY(-12px)
+            rotate(-2deg);
+    }
+
+}
+
+
+@keyframes bunnyFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-20px)
+            rotate(5deg);
+    }
+
+}
+
+
+@keyframes unicornFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(3deg);
+    }
+
+}
+
+
+@keyframes unicornIdle {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+    }
+
+}
+
+
+@keyframes waveHand {
+
+    0% {
+        transform:
+            rotate(-25deg);
+    }
+
+    100% {
+        transform:
+            rotate(25deg);
+    }
+
+}
+
+
+@keyframes unicornSparkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+
+        transform:
+            scale(0.7)
+            rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.8;
+
+        transform:
+            scale(1.2)
+            rotate(90deg);
+    }
+
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.4;
+    }
+
+    85% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            scale(1.2);
+
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes sparkleAnimation {
+
+    0%,
+    100% {
+        opacity: 0.2;
+
+        transform:
+            scale(0.7)
+            rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.8;
+
+        transform:
+            scale(1.2)
+            rotate(90deg);
+    }
+
+}
+
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes balloonRise {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(-4deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(-55vh)
+            translateX(15px)
+            rotate(4deg);
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            translateX(-10px)
+            rotate(-3deg);
+
+        opacity: 0.9;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .birthday-title-row {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .birthday-title-text {
+        text-align: center;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .welcome-screen {
+        padding: 25px;
+    }
+
+
+    .small-message {
+        font-size: 11px;
+    }
+
+
+    .intro {
+        font-size: 16px;
+    }
+
+
+    .bunny {
+        font-size: 38px;
+    }
+
+
+    .bunny-one {
+        left: 5%;
+        bottom: 8%;
+    }
+
+
+    .bunny-two {
+        right: 5%;
+        top: 10%;
+
+        font-size: 30px;
+    }
+
+
+    .unicorn {
+        right: 5%;
+        bottom: 8%;
+
+        font-size: 42px;
+    }
+
+
+    /* Welcome redesign, mobile */
+
+    .decor { --k: 0.65; }
+
+    .hide-sm { display: none; }
+
+    .gift-wrap { width: clamp(140px, 24vh, 240px); }
+
+    .tape { width: 90px; height: 26px; }
+
+    .cursor-glow { width: 200px; height: 200px; }
+
+
+    /* Unicorn screen mobile */
+
+    .unicorn-screen {
+        --unicorn-w: clamp(120px, 34vw, 190px);
+    }
+
+    .surprise-unicorn {
+        bottom: clamp(60px, 14vh, 100px);
+    }
+
+    .unicorn-left {
+        left: -45%;
+    }
+
+    .unicorn-right {
+        right: -45%;
+    }
+
+    .unicorn-shared-bubble {
+        top: 24%;
+    }
+
+    .rainbow {
+        width: clamp(180px, 60vw, 300px);
+        top: 3%;
+    }
+
+    .magic-ground {
+        height: clamp(70px, 16vh, 110px);
+    }
+
+    .magic-cloud {
+        font-size: clamp(22px, 8vw, 36px);
+    }
+
+
+    .speech-bubble {
+        font-size: 14px;
+
+        padding: 10px 16px;
+    }
+
+
+    .speech-left {
+        left: 15px;
+    }
+
+
+    .speech-right {
+        right: 15px;
+    }
+
+
+    .unicorn-introduction {
+        bottom: 19%;
+
+        font-size: 14px;
+    }
+
+
+    .surprise-action {
+        bottom: 7%;
+    }
+
+
+    .surprise-action p {
+        font-size: 11px;
+    }
+
+
+    .see-surprise-button {
+        padding: 14px 20px;
+
+        font-size: 11px;
+    }
+
+
+    /* Birthday */
+
+    .birthday-content {
+        padding: 25px;
+    }
+
+
+    .birthday-small {
+        font-size: 11px;
+    }
+
+
+    .love-message {
+        font-size: 15px;
+    }
+
+
+    .birthday-characters {
+        font-size: 25px;
+    }
+
+
+    .birthday-title-row {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 24px;
+    }
+
+
+    .birthday-title-text {
+        text-align: center;
+
+        padding-top: 0;
+
+        flex: 0 1 auto;
+    }
+
+
+    .photo-frame,
+    .photo-carousel-window {
+        width: 240px;
+
+        height: 240px;
+
+        margin: 0 auto;
+
+        border-radius: 8px;
+    }
+
+
+    .arrow-left {
+        left: -38px;
+    }
+
+
+    .arrow-right {
+        right: -38px;
+    }
+
+
+    /* Smaller bats on phones */
+
+    .bat {
+        font-size: 25px !important;
+    }
+
+
+    /* Flower garden mobile */
+
+    .flower-garden-heading {
+        top: 4%;
+    }
+
+    .flower-garden-small {
+        font-size: 13px;
+    }
+
+    .flower-bubble {
+        max-width: 150px;
+
+        font-size: 15px;
+
+        padding: 10px 12px;
+
+        border-radius: 16px;
+    }
+
+    .bubble-tl {
+        top: 14%;
+        left: 8%;
+    }
+
+    .bubble-tr {
+        top: 14%;
+        right: 8%;
+    }
+
+    .bubble-bl {
+        bottom: 30%;
+        left: 6%;
+    }
+
+    .bubble-br {
+        bottom: 30%;
+        right: 6%;
+    }
+
+    .flower-anchor {
+        width: clamp(190px, 60vw, 300px);
+
+        height: clamp(220px, 48vh, 380px);
+    }
+
+    .cloud-piece {
+        width: 70vw;
+        height: 70vw;
+    }
+
+    .flower-continue p {
+        font-size: 15px;
+    }
+
+    .see-next-button {
+        padding: 14px 22px;
+
+        font-size: 15px;
+    }
+
+
+    /* Lights toggle mobile */
+
+    .night-toggle {
+        top: 12px;
+        right: 12px;
+
+        padding: 8px 14px;
+
+        font-size: 10px;
+    }
+
+
+    .night-toggle-icon {
+        font-size: 13px;
+    }
+
+}
